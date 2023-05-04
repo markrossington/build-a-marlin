@@ -40,3 +40,7 @@ I offer no warranty, support or guarantees. Any changes to your 3D printer firmw
   2. Why Python and not X, Y or Z?
       * I wanted this to work on as many platforms as possible. Python allows for this and is often installed on many peoples machines anyway. It's worth noting that building Marlin doesn't work on a Raspberry Pi at this point in time, this is a limitation of the toolchains and nothing I can control.
  
+# Sources/Links
+
+ - The amazing Marlin project: https://github.com/MarlinFirmware/Marlin
+ - Based on my Marlin for Artillery Sidewinder X2 specific project here: https://github.com/markrossington/sidewinder-x2-marlin
