@@ -23,21 +23,3 @@ marlin_configuration_adv_h = "https://github.com/MarlinFirmware/Configurations/r
 
 # If the configurations live in a private github repo, add your PAT here
 personal_access_token = "" # Leave blank for public repos
-
-# ==== Flashing ====
-
-dfu_util_path = ""  # Leave blank to use platformio's version
-printer_backup_folder = "eeprom_settings"
-
-# Can override the platformio command if required here
-pio_path_override = ""  # leave blank to override
-
-# ==== Remote Flashing ====
-# Only need to use these settings for remote_flash.py
-
-# The SSH username and IP address of remote host connected to 3d printer
-remote_address = "pi@192.168.0.1" 
-
-# Temp folder on remote host to put the scripts and firmware binary
-remote_folder = "/home/pi/marlin_flashing"
-
