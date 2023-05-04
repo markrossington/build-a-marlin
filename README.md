@@ -30,6 +30,10 @@ I offer no warranty, support or guarantees. Any changes to your 3D printer firmw
     * Linux/Mac: `python3 scripts/marlin_build.py`
  7. There will be a lot of text flying past which is a good thing, once it's stopped firmware should be built and available in the `output` folder. Check for `firmware.bin`
 
+## Now what? (Flashing)
+
+Unfortunately now you have to follow your own printers instructions on how to flash `firmware.bin` to it. I will add useful links for popular printers here if people share them.
+
 # FAQ
 
   1. If you're going to flash a new firmware, why not just use [Klipper](https://www.klipper3d.org)?
