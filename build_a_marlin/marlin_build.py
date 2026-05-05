@@ -40,7 +40,7 @@ class MarlinBuild:
             print(f"\t{curr_dir}")
 
     def get_marlin(self):
-        download_zip_filepath: str = f"tmp/marlin_{settings.marlin_version}.zip"
+        download_zip_filepath: str = f"tmp/marlin_{settings.marlin_ref}.zip"
         Common.download_file(settings.marlin_download_url, download_zip_filepath)
         Common.clean_up_folder("build")
 

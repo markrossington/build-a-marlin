@@ -2,8 +2,8 @@
 pio_download_url = "https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py"
 
 # ==== Building Marlin ====
-marlin_version = "cfbd8a2e3665585cecb749de6428c749f833273f"  # latest commit tested on bugfix-2.1.x
-marlin_download_url = f"https://github.com/MarlinFirmware/Marlin/archive/{marlin_version}.zip"
+marlin_ref = "cfbd8a2e3665585cecb749de6428c749f833273f"  # latest commit tested on bugfix-2.1.x
+marlin_download_url = f"https://github.com/MarlinFirmware/Marlin/archive/{marlin_ref}.zip"
 
 # This is the PlatformIO target (i.e. which board to build for)
 # Artillery_Ruby is the name of the Artillery 3D 32bit printer mainboard
