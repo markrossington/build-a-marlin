@@ -99,11 +99,11 @@ class Common:
 
     @staticmethod
     def install_platformio() -> bool:
-        Common.download_file(settings.pio_download_url, settings.local_pio_script_path)
-        pio_install_success = Common.run_process([sys.executable, settings.local_pio_script_path])
+        Common.download_file(settings.pio_download_url, Common.local_pio_script_path)
+        pio_install_success = Common.run_process([sys.executable, Common.local_pio_script_path])
 
         if not pio_install_success:
             return False
 
-        Common.clean_up_files([settings.local_pio_script_path])
+        Common.clean_up_files([Common.local_pio_script_path])
         return True
