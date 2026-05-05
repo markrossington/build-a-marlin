@@ -5,7 +5,7 @@
 
 [Marlin](https://github.com/MarlinFirmware/Marlin) comes pre-installed on most 3D printers and for non-programmers this can be a pain to build. Building is useful for those who want up to date firmware or features which aren't usually enabled.
 
-Build A Marlin will download the latest supported Marlin, apply a selected configuration and build the firmware to flash onto your printer.
+Build A Marlin will download a configured Marlin version, apply a selected configuration and build the firmware to flash onto your printer. By default it uses the Marlin project example configuration for the Artillery Sidewinder X2.
 
 Feel free to [open an issue](https://github.com/markrossington/build-a-marlin/issues/new) if you are having problems.
 
@@ -26,8 +26,8 @@ I offer no warranty, support or guarantees. Any changes to your 3D printer firmw
     * Windows: `cd C:/build-a-marlin/` 
     * Linux/Mac: `cd ~/build-a-marlin/` 
  6. Type:
-    * Windows `python scripts/marlin_build.py`
-    * Linux/Mac: `python3 scripts/marlin_build.py`
+    * Windows `python build_a_marlin/marlin_build.py`
+    * Linux/Mac: `python3 build_a_marlin/marlin_build.py`
  7. There will be a lot of text flying past which is a good thing, once it's stopped firmware should be built and available in the `output` folder. Check for `firmware.bin`
 
 ## Now what? (Flashing)
