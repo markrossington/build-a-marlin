@@ -3,7 +3,6 @@ import configparser
 import glob
 import os
 import shutil
-import sys
 import zipfile
 
 # Local Includes
@@ -12,25 +11,44 @@ from common import Common
 
 
 class MarlinBuild:
-    default_config_paths = ["config/Configuration.h", "config/Configuration_adv.h"]
     config_paths = ["", ""]
 
     def __init__(self):
         Common.clean_up_folder("tmp/custom_config")
+        os.makedirs("tmp/custom_config", exist_ok=True)
+        self.config_paths = ["tmp/custom_config/Configuration.h", "tmp/custom_config/Configuration_adv.h"]
 
-        if settings.use_custom_config == False or settings.marlin_configuration_h == "" or settings.marlin_configuration_adv_h == "":
-            self.config_paths = self.default_config_paths
+        config_sources = [settings.configuration_h_source, settings.configuration_adv_h_source]
+        for source, destination in zip(config_sources, self.config_paths):
+            if not self.stage_config_source(source, destination):
+                raise SystemExit(1)
+
+    @staticmethod
+    def is_remote_source(source: str) -> bool:
+        return source.startswith("http://") or source.startswith("https://")
+
+    @staticmethod
+    def stage_config_source(source: str, destination: str) -> bool:
+        if source == "":
+            print("[Error] Config source is empty")
+            return False
+
+        if MarlinBuild.is_remote_source(source):
+            if not Common.download_file(source, destination, settings.personal_access_token):
+                print(f"[Error] Cannot download config source {source}")
+                return False
         else:
-            os.makedirs("tmp/custom_config", exist_ok=True)
-            self.config_paths = ["tmp/custom_config/Configuration.h", "tmp/custom_config/Configuration_adv.h"]
+            if not os.path.isfile(source):
+                print(f"[Error] Cannot find config source {source}")
+                return False
+            print(f"[Info] Copying {source} to {destination}")
+            shutil.copy(source, destination)
 
-            Common.download_file(settings.marlin_configuration_h, self.config_paths[0], settings.personal_access_token)
-            Common.download_file(settings.marlin_configuration_adv_h, self.config_paths[1], settings.personal_access_token)
+        if not os.path.isfile(destination):
+            print(f"[Error] Cannot find staged config {destination}")
+            return False
 
-            for file_check in self.config_paths:
-                if not os.path.isfile(file_check):
-                    print(f"[Error] Cannot find {file_check}")
-                    sys.exit()
+        return True
 
     def make_folder_structure(self):
         directories_to_make = ["tmp", "build", "output"]
