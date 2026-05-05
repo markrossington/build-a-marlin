@@ -4,7 +4,6 @@ import shutil
 import subprocess
 import sys
 import urllib.request
-from distutils.spawn import find_executable
 from os.path import expanduser
 from sys import platform
 from typing import List
@@ -59,7 +58,7 @@ class Common:
     @staticmethod
     def check_command_exists(command: str) -> bool:
         print(f"[Info] Checking for {command}")
-        command_full_path = find_executable(command)
+        command_full_path = shutil.which(command)
 
         if command_full_path is None:
             print(f"[Info] {command} not found")
@@ -88,14 +87,13 @@ class Common:
     def find_pio_command() -> str:
         print("[Info] Searching for platformio to use")
         path_to_use = ""
-        if settings.pio_path_override != "":
-            path_to_use = settings.pio_path_override
+        pio_path_override = getattr(settings, "pio_path_override", "")
+        if pio_path_override != "":
+            path_to_use = pio_path_override
         if Common.check_command_exists("pio"):
             path_to_use = "pio"
         if Common.check_command_exists(Common.pio_command):
             path_to_use = Common.pio_command
-        else:
-            path_to_use = ""
         print(f"[Info] Using {path_to_use}")
         return path_to_use
 

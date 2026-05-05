@@ -93,12 +93,18 @@ class MarlinBuild:
 
 
 def main():
-    mb = MarlinBuild()
     Common.work_top_level()
+    mb = MarlinBuild()
     mb.make_folder_structure()
 
-    if not Common.check_command_exists(Common.pio_command):
+    Common.pio_command = Common.find_pio_command()
+    if Common.pio_command == "":
         Common.install_platformio()
+        Common.pio_command = Common.find_pio_command()
+
+    if Common.pio_command == "":
+        print("[Error] PlatformIO could not be found or installed")
+        return
 
     mb.get_marlin()
 
